@@ -9,6 +9,7 @@ import Main from '~/components/Main';
 
 const domain = import.meta.env.VITE_AUTH0_DOMAIN;
 const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
+const audience = import.meta.env.VITE_AUTH0_AUDIENCE;
 
 const App = () => (
   <Provider store={store}>
@@ -16,6 +17,7 @@ const App = () => (
       domain={domain}
       clientId={clientId}
       redirectUri={window.location.origin}
+      audience={audience}
     >
       <Container>
         <Navigation />

@@ -49,7 +49,7 @@ const buildRequest =
     if (token != null) {
       headers = {
         ...headers,
-        Bearer: token,
+        authorization: `Bearer: ${token}`,
       };
     }
 
