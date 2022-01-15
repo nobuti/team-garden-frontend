@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Auth0Provider } from '@auth0/auth0-react';
+import { Provider } from 'react-redux';
 
+import store from '~/store';
 import Container from '~/components/Container';
 import Navigation from '~/components/Navigation';
 import Main from '~/components/Main';
@@ -8,14 +10,8 @@ import Main from '~/components/Main';
 const domain = import.meta.env.VITE_AUTH0_DOMAIN;
 const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
 
-const App = () => {
-  useEffect(() => {
-    fetch('http://localhost:3000/api/v1/resources')
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-  }, []);
-
-  return (
+const App = () => (
+  <Provider store={store}>
     <Auth0Provider
       domain={domain}
       clientId={clientId}
@@ -26,7 +22,7 @@ const App = () => {
         <Main />
       </Container>
     </Auth0Provider>
-  );
-};
+  </Provider>
+);
 
 export default App;
