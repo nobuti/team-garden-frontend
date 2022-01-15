@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  padding: 1.25rem;
+}
+
+.heading {
+  display: flex;
+  font-size: 1.125rem;
+  font-weight: 600;
+  align-items: baseline;
+}
+
+.logo {
+  fill: rgb(229, 229, 229);
+  display: block;
+  transform: translateY(1px);
+}

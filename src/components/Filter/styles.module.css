@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
+  padding: 1.25rem;
+  color: rgb(163, 163, 163);
+}
+
+.heading {
+  font-size: .875rem;
+  line-height: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  color: currentColor;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  line-height: normal;
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 0;
+}
+
+.button:hover,
+.button.isSelected {
+  background-color: rgb(38, 38, 38);;
+}
+
+
+.icon {
+  display: block;
+  margin-right: 0.5rem;
+}

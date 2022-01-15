@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-
-import styles from './styles.module.css';
+import Navigation from '~/components/Navigation';
 
 const App = () => {
   useEffect(() => {
@@ -9,7 +8,7 @@ const App = () => {
       .then((data) => console.log(data));
   }, []);
 
-  return <div className={styles.container}>Wadus wadus</div>;
+  return <Navigation />;
 };
 
 export default App;
