@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react';
+import { Auth0Provider } from '@auth0/auth0-react';
 
+import Container from '~/components/Container';
 import Navigation from '~/components/Navigation';
 import Main from '~/components/Main';
+
+const domain = import.meta.env.VITE_AUTH0_DOMAIN;
+const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
 
 const App = () => {
   useEffect(() => {
@@ -11,10 +16,16 @@ const App = () => {
   }, []);
 
   return (
-    <>
-      <Navigation />
-      <Main />
-    </>
+    <Auth0Provider
+      domain={domain}
+      clientId={clientId}
+      redirectUri={window.location.origin}
+    >
+      <Container>
+        <Navigation />
+        <Main />
+      </Container>
+    </Auth0Provider>
   );
 };
 
