@@ -1,3 +1,5 @@
+import { serialize } from 'object-to-formdata';
+
 import { API } from '~/config';
 
 const processError = async (response) => {
@@ -30,10 +32,10 @@ const request = (url, options) => {
   if (body != null) {
     opts = {
       ...opts,
-      body: JSON.stringify(body),
+      body: serialize(body, { indices: true }),
     };
   }
-  const endpoint = `${API}/${url}`;
+  const endpoint = `${API}${url}`;
   return fetch(endpoint, opts).then(handleResponse).then(processResponse);
 };
 
