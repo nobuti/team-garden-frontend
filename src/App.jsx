@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
+
 import Navigation from '~/components/Navigation';
+import Main from '~/components/Main';
 
 const App = () => {
   useEffect(() => {
@@ -8,7 +10,12 @@ const App = () => {
       .then((data) => console.log(data));
   }, []);
 
-  return <Navigation />;
+  return (
+    <>
+      <Navigation />
+      <Main />
+    </>
+  );
 };
 
 export default App;

@@ -1,7 +1,16 @@
 .container {
-  display: flex;
+  display: none;
   flex-direction: column;
-  width: 16rem;
+  width: 24rem;
   height: 100%;
   border-right: 1px solid rgb(38, 38, 38);
+  position: absolute;
+}
+
+@media screen and (min-width: 64rem) {
+  .container {
+    display: flex;
+    position: static;
+    width: 16rem;
+  }
 }

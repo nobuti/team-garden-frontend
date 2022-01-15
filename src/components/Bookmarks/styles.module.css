@@ -1,0 +1,32 @@
+.container {
+  display: none;
+  flex-direction: column;
+  flex: 1 1 0%;
+  height: 100%;
+}
+
+.container.isActive {
+  display: flex;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  border-right: 1px solid rgb(38, 38, 38);
+}
+
+.inner.isLogged {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+@media screen and (min-width: 48rem) {
+  .container {
+    display: flex;
+    width: 24rem;
+    border-right: 1px solid rgb(38, 38, 38);
+  }
+}
