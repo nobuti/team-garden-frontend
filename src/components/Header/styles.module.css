@@ -4,6 +4,7 @@
 }
 
 .heading {
+  flex: 1 1 0%;
   display: flex;
   font-size: 1.125rem;
   font-weight: 600;
@@ -14,4 +15,31 @@
   fill: rgb(229, 229, 229);
   display: block;
   transform: translateY(1px);
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  padding: 0;
+  height: 2rem;
+  width: 2rem;
+}
+
+.close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+@media screen and (min-width: 64rem) {
+  .close {
+    display: none;
+  }
+}
+
+.icon {
+  color: rgb(229, 229, 229);
 }

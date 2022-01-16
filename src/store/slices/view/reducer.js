@@ -2,12 +2,12 @@ import { VIEW } from '~/config';
 import { UPDATE_VIEW } from './actions';
 
 export const INITIAL_STATE = {
-  view: VIEW.resources,
+  current: VIEW.resources,
 };
 
 const updateView = (state, action) => ({
   ...state,
-  view: action.payload.view,
+  current: action.payload.view,
 });
 
 export default {

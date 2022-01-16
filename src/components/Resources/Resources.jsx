@@ -1,18 +1,24 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import cx from 'classnames';
 
-import { ACTION, FETCH } from '~/config';
+import { ACTION, FETCH, VIEW } from '~/config';
 import Toolbar from '~/components/Toolbar';
 import Loading from '~/components/Loading';
 import Resource from '~/components/Resource';
 import List from '~/components/List';
+import { updateView } from '~/store/slices/view/actions';
 
+import { useAuth0 } from '@auth0/auth0-react';
 import styles from './styles.module.css';
 
-const MenuAction = () => (
-  <button className={cx(styles.button, styles.menu)} type="button">
+const MenuAction = ({ onClick }) => (
+  <button
+    className={cx(styles.button, styles.menu)}
+    type="button"
+    onClick={onClick}
+  >
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 448 512"
@@ -27,8 +33,12 @@ const MenuAction = () => (
   </button>
 );
 
-const BookmarksAction = () => (
-  <button className={cx(styles.button, styles.bookmarks)} type="button">
+const BookmarksAction = ({ onClick }) => (
+  <button
+    className={cx(styles.button, styles.bookmarks)}
+    type="button"
+    onClick={onClick}
+  >
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 384 512"
@@ -43,6 +53,9 @@ const BookmarksAction = () => (
   </button>
 );
 const Resources = () => {
+  const { isAuthenticated } = useAuth0();
+  const dispatch = useDispatch();
+  const currentMobileView = useSelector((state) => state.view.current);
   const resources = useSelector((state) => state.resources);
   const bookmarks = useSelector((state) => state.bookmarks.bookmarks);
   const data = resources.resources.filter((r) => !bookmarks.includes(r.id));
@@ -50,12 +63,22 @@ const Resources = () => {
     resources.status === FETCH.status.fetching &&
     resources.resources.length === 0;
 
+  const showSection = (view) => dispatch(updateView({ view }));
+
   return (
-    <div className={cx(styles.container, { [styles.isActive]: true })}>
+    <div
+      className={cx(styles.container, {
+        [styles.isActive]: currentMobileView === VIEW.resources,
+      })}
+    >
       <Toolbar
         title="Discover"
-        leftAction={<MenuAction />}
-        rightAction={<BookmarksAction />}
+        leftAction={<MenuAction onClick={() => showSection(VIEW.menu)} />}
+        rightAction={
+          isAuthenticated ? (
+            <BookmarksAction onClick={() => showSection(VIEW.bookmarks)} />
+          ) : null
+        }
       />
       {isLoading ? (
         <Loading />
