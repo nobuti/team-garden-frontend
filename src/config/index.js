@@ -16,3 +16,9 @@ export const ACTION = {
   save: 'save',
   remove: 'remove',
 };
+export const CATEGORY = {
+  tutorial: 'tutorial',
+  package: 'package',
+  example: 'example',
+  other: 'other',
+};

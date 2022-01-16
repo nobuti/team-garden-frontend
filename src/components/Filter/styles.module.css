@@ -26,9 +26,8 @@
   padding: 0.5rem 0;
 }
 
-.button:hover,
-.button.isSelected {
-  background-color: rgb(38, 38, 38);;
+.button.isActive {
+  color: rgb(236, 236, 236);
 }
 
 

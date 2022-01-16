@@ -56,9 +56,14 @@ const Resources = () => {
   const { isAuthenticated } = useAuth0();
   const dispatch = useDispatch();
   const currentMobileView = useSelector((state) => state.view.current);
+  const currentFilter = useSelector((state) => state.filter.current);
   const resources = useSelector((state) => state.resources);
   const bookmarks = useSelector((state) => state.bookmarks.bookmarks);
-  const data = resources.resources.filter((r) => !bookmarks.includes(r.id));
+  let data = resources.resources.filter((r) => !bookmarks.includes(r.id));
+  if (currentFilter != null) {
+    data = data.filter((r) => r.category === currentFilter);
+  }
+
   const isLoading =
     resources.status === FETCH.status.fetching &&
     resources.resources.length === 0;
