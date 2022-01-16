@@ -1,0 +1,9 @@
+.list {
+  height: 100%;
+  overflow: auto;
+  padding: 5rem 0;
+}
+
+.list li + li {
+  margin-top: 1rem;
+}

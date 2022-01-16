@@ -17,11 +17,14 @@ const fetchBookmarks = (state) => ({
   error: null,
 });
 
-const fetchBookmarksSuccess = (state, action) => ({
-  ...action.payload,
-  status: FETCH.status.success,
-  error: null,
-});
+const fetchBookmarksSuccess = (state, action) => {
+  const bookmarks = action.payload.bookmarks.map((b) => b.resource_id);
+  return {
+    bookmarks,
+    status: FETCH.status.success,
+    error: null,
+  };
+};
 
 const fetchBookmarksError = (state, action) => ({
   ...state,

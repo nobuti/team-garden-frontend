@@ -12,3 +12,7 @@ export const FETCH = {
     failed: 'failed',
   },
 };
+export const ACTION = {
+  save: 'save',
+  remove: 'remove',
+};

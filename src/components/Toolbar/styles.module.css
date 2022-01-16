@@ -13,35 +13,3 @@
   line-height: 2rem;
 }
 
-.button {
-  background-color: transparent;
-  border: none;
-  box-shadow: none;
-  cursor: pointer;
-  padding: 0;
-  height: 2rem;
-  width: 2rem;
-}
-
-.menu,
-.bookmarks {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-@media screen and (min-width: 48rem) {
-  .bookmarks {
-    display: none;
-  }
-}
-
-@media screen and (min-width: 64rem) {
-  .menu {
-    display: none;
-  }
-}
-
-.icon {
-  color: rgb(229, 229, 229);
-}
