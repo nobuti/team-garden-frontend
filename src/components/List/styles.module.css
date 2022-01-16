@@ -1,3 +1,16 @@
+.empty {
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  color: rgb(163, 163, 163);
+  padding: 5rem 1.5rem;
+}
+
+@media screen and (min-width: 64rem) {
+  .empty {
+    padding: 5rem 1rem;
+  }
+}
+
 .list {
   height: 100%;
   overflow: auto;
