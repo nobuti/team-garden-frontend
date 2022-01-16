@@ -62,7 +62,7 @@ const Resources = () => {
       ) : (
         <List
           data={data}
-          key="url"
+          metakey="id"
           render={(d) => <Resource action={ACTION.save} {...d} />}
         />
       )}

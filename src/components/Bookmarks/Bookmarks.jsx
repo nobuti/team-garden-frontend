@@ -39,8 +39,12 @@ const Bookmarks = () => {
     bookmarks.bookmarks.length === 0;
   const data = resources.filter((r) => bookmarks.bookmarks.includes(r.id));
 
-  if (!isAuthenticated || (!isLoading && bookmarks.bookmarks.length === 0)) {
-    return <Placeholder />;
+  if (!isAuthenticated) {
+    return (
+      <div className={cx(styles.container, { [styles.isActive]: false })}>
+        <Placeholder />
+      </div>
+    );
   }
 
   return (
@@ -51,7 +55,7 @@ const Bookmarks = () => {
       ) : (
         <List
           data={data}
-          key="url"
+          metakey="id"
           render={(d) => <Resource action={ACTION.remove} {...d} />}
         />
       )}

@@ -1,15 +1,22 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable camelcase */
 import React from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useSelector, useDispatch } from 'react-redux';
 import cx from 'classnames';
 
 import * as Dates from '~/services/dates';
 import * as Urls from '~/services/urls';
-import { ACTION } from '~/config';
+import { ACTION, FETCH } from '~/config';
+import {
+  createBookmark,
+  removeBookmark,
+} from '~/store/slices/bookmarks/actions';
 
 import styles from './styles.module.css';
 
-const SaveButton = () => (
-  <button type="button" className={styles.button}>
+const SaveButton = ({ onClick }) => (
+  <button type="button" className={styles.button} onClick={onClick}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 384 512"
@@ -24,8 +31,8 @@ const SaveButton = () => (
   </button>
 );
 
-const RemoveButton = () => (
-  <button type="button" className={styles.button}>
+const RemoveButton = ({ onClick }) => (
+  <button type="button" className={styles.button} onClick={onClick}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 320 512"
@@ -41,39 +48,67 @@ const RemoveButton = () => (
 );
 
 const Resource = ({
+  id,
   title,
   url,
   description,
   created_at,
   category,
   action,
-}) => (
-  <article className={styles.container}>
-    <section className={styles.resource}>
-      <div className={styles.details}>
-        <span className={cx(styles.category, styles.truncate)}>
-          {category} / {Urls.host(url)}
-        </span>
-        <span className={styles.date}>{Dates.format(created_at)}</span>
+}) => {
+  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const user = useSelector((state) => state.user);
+  const bookmarks = useSelector((state) => state.bookmarks);
+  const dispatch = useDispatch();
 
-        {action === ACTION.save ? <SaveButton /> : <RemoveButton />}
-      </div>
-      <a
-        className={styles.link}
-        title={title}
-        href={url}
-        target="_blank"
-        rel="noreferrer"
-      >
-        <h2 className={cx(styles.title, styles.clamp)}>{title}</h2>
-      </a>
-      {description && (
-        <div className={cx(styles.truncate, styles.description)}>
-          {description}
+  const saveBookmark = async () => {
+    if (bookmarks.status !== FETCH.status.fetching) {
+      const token = await getAccessTokenSilently();
+      dispatch(createBookmark({ user: user.data.id, resource: id, token }));
+    }
+  };
+
+  const deleteBookmark = async () => {
+    if (bookmarks.status !== FETCH.status.fetching) {
+      const token = await getAccessTokenSilently();
+      dispatch(removeBookmark({ user: user.data.id, resource: id, token }));
+    }
+  };
+
+  return (
+    <article className={styles.container}>
+      <section className={styles.resource}>
+        <div className={styles.details}>
+          <span className={cx(styles.category, styles.truncate)}>
+            {category} / {Urls.host(url)}
+          </span>
+          <span className={styles.date}>{Dates.format(created_at)}</span>
+
+          {isAuthenticated ? (
+            action === ACTION.save ? (
+              <SaveButton onClick={saveBookmark} />
+            ) : (
+              <RemoveButton onClick={deleteBookmark} />
+            )
+          ) : null}
         </div>
-      )}
-    </section>
-  </article>
-);
+        <a
+          className={styles.link}
+          title={title}
+          href={url}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <h2 className={cx(styles.title, styles.clamp)}>{title}</h2>
+        </a>
+        {description && (
+          <div className={cx(styles.truncate, styles.description)}>
+            {description}
+          </div>
+        )}
+      </section>
+    </article>
+  );
+};
 
 export default Resource;
