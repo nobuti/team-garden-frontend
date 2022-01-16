@@ -30,10 +30,16 @@
   margin-bottom: 0.375rem;
 }
 
-.category {
+.origin {
   flex: 1 1 0%;
+}
+
+.category {
   text-transform: capitalize;
-  margin-right: 1rem;
+}
+
+.host {
+  margin-left: 0.25rem;
 }
 
 .truncate {

@@ -79,8 +79,9 @@ const Resource = ({
     <article className={styles.container}>
       <section className={styles.resource}>
         <div className={styles.details}>
-          <span className={cx(styles.category, styles.truncate)}>
-            {category} / {Urls.host(url)}
+          <span className={cx(styles.truncate, styles.origin)}>
+            <span className={styles.category}>{category}</span> /
+            <span className={styles.host}>{Urls.host(url)}</span>
           </span>
           <span className={styles.date}>{Dates.format(created_at)}</span>
 
