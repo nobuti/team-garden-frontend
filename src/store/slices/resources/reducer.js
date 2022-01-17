@@ -18,7 +18,7 @@ const fetchResources = (state) => ({
 });
 
 const fetchResourcesSuccess = (state, action) => ({
-  ...action.payload,
+  resources: action.payload.resources,
   status: FETCH.status.success,
   error: null,
 });
