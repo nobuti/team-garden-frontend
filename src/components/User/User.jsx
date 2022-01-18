@@ -7,7 +7,7 @@ const Profile = ({ name, picture }) => {
   const { logout } = useAuth0();
 
   return (
-    <div className={styles.profile}>
+    <div data-testid="profile" className={styles.profile}>
       <img className={styles.image} src={picture} alt={name} />
 
       <div className={styles.user}>

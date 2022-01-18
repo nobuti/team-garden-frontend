@@ -13,8 +13,7 @@ module.exports = {
   testPathIgnorePatterns: ['/node_modules/', './src/config/tests/'],
   moduleFileExtensions: ['js', 'jsx'],
   transform: {
-    '^.+\\.js$': 'babel-jest',
-    '^.+\\.jsx$': 'babel-jest',
+    '^.+\\.(js|jsx)$': 'babel-jest',
   },
   testEnvironment: 'jsdom',
 };

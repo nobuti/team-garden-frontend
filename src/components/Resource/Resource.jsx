@@ -16,7 +16,12 @@ import {
 import styles from './styles.module.css';
 
 const SaveButton = ({ onClick }) => (
-  <button type="button" className={styles.button} onClick={onClick}>
+  <button
+    type="button"
+    className={styles.button}
+    onClick={onClick}
+    data-testid="save-resource"
+  >
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 384 512"
@@ -32,7 +37,12 @@ const SaveButton = ({ onClick }) => (
 );
 
 const RemoveButton = ({ onClick }) => (
-  <button type="button" className={styles.button} onClick={onClick}>
+  <button
+    type="button"
+    className={styles.button}
+    onClick={onClick}
+    data-testid="remove-resource"
+  >
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 320 512"
@@ -76,7 +86,7 @@ const Resource = ({
   };
 
   return (
-    <article className={styles.container}>
+    <article className={styles.container} data-testid="resource">
       <section className={styles.resource}>
         <div className={styles.details}>
           <span className={cx(styles.truncate, styles.origin)}>

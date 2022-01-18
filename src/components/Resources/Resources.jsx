@@ -59,7 +59,9 @@ const Resources = () => {
   const currentFilter = useSelector((state) => state.filter.current);
   const resources = useSelector((state) => state.resources);
   const bookmarks = useSelector((state) => state.bookmarks.bookmarks);
-  let data = resources.resources.filter((r) => !bookmarks.includes(r.id));
+  let data = isAuthenticated
+    ? resources.resources.filter((r) => !bookmarks.includes(r.id))
+    : resources.resources;
   if (currentFilter != null) {
     data = data.filter((r) => r.category === currentFilter);
   }
